@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ─────────────────────────────────────────────── */
+:root {
+  --color-gold: #d4a853;
+  --color-gold-dim: rgba(212, 168, 83, 0.15);
+  --color-gold-glow: rgba(212, 168, 83, 0.4);
+  --color-green: #15803d;
+  --color-blue: #60a5fa;
+  --color-purple: #a78bfa;
+  --color-surface: #0d0d0d;
+  --color-surface-2: #141414;
+  --color-surface-3: #1a1a1a;
+  --color-text: #f0ede8;
+  --color-muted: #9ca3af;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+/* ── Base Styles ────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #000000;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ── Scrollbar Styles ───────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a #0a0a0a;
+}
+
+/* ── Keyframe Animations ────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    filter: blur(40px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(30px);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cross-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes cross-glow-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(212, 168, 83, 0.5))
+      drop-shadow(0 0 20px rgba(212, 168, 83, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(212, 168, 83, 0.9))
+      drop-shadow(0 0 40px rgba(212, 168, 83, 0.4));
+  }
+}
+
+@keyframes radial-breathe {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* ── Animation Utility Classes ──────────────────────────────────────────── */
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease-out forwards;
+}
+
+.animate-cross-float {
+  animation: cross-float 7s ease-in-out infinite;
+}
+
+.animate-cross-glow {
+  animation: cross-glow-pulse 4s ease-in-out infinite;
+}
+
+.animate-radial-breathe {
+  animation: radial-breathe 5s ease-in-out infinite;
+}
+
+/* ── Staggered animation delays ────────────────────────────────────────── */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+
+/* ── Bible Prose Styling ────────────────────────────────────────────────── */
+.bible-text {
+  font-family: var(--font-serif);
+  line-height: 1.9;
+  color: #e8e4de;
+  font-size: 1.0625rem;
+}
+
+.bible-text p {
+  margin-bottom: 1.25rem;
+}
+
+.bible-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Cross Glow Container ───────────────────────────────────────────────── */
+.cross-glow-container {
+  position: relative;
+}
+
+.cross-glow-container::before {
+  content: "";
+  position: absolute;
+  inset: -60px;
+  background: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    rgba(212, 168, 83, 0.18) 0%,
+    rgba(212, 168, 83, 0.06) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: radial-breathe 5s ease-in-out infinite;
+}
+
+/* ── Card Base Style ────────────────────────────────────────────────────── */
+.card-base {
+  background: var(--color-surface-2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-base:hover {
+  border-color: rgba(212, 168, 83, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Shimmer Skeleton ───────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #1a1a1a 0%,
+    #252525 50%,
+    #1a1a1a 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* ── Gold Accent Border ─────────────────────────────────────────────────── */
+.gold-border {
+  border: 1px solid rgba(212, 168, 83, 0.3);
+}
+
+.gold-border-top {
+  border-top: 2px solid rgba(212, 168, 83, 0.4);
+}
+
+/* ── Progress Bar Track ─────────────────────────────────────────────────── */
+.progress-track {
+  background: #1a1a1a;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #92631e, #d4a853, #f0c878);
+  border-radius: 100px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(212, 168, 83, 0.5);
+}
+
+/* ── Textarea Dark Style ────────────────────────────────────────────────── */
+.textarea-dark {
+  background: #0a0a0a;
+  border: 1px solid #222;
+  color: var(--color-text);
+  border-radius: 8px;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.textarea-dark:focus {
+  outline: none;
+  border-color: rgba(212, 168, 83, 0.4);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.08);
+}
+
+.textarea-dark::placeholder {
+  color: #444;
+}
+
+/* ── Button Styles ──────────────────────────────────────────────────────── */
+.btn-gold {
+  background: linear-gradient(135deg, #92631e, #d4a853);
+  color: #0a0600;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 16px rgba(212, 168, 83, 0.25);
+}
+
+.btn-gold:hover {
+  opacity: 0.92;
+  box-shadow: 0 6px 24px rgba(212, 168, 83, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  color: var(--color-muted);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: #3a3a3a;
+  color: var(--color-text);
+}
+
+/* ── Hero Gradient Fade ─────────────────────────────────────────────────── */
+.hero-fade-bottom {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    #000000 100%
+  );
+}
